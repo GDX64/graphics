@@ -13,7 +13,7 @@ import CVector from "../pop/CVector";
 import SVector from "../pop/ScaledVector";
 import { scaleCreator } from "../pop/Scalegrid";
 
-const [ox, oy] = [250, -250];
+const [ox, oy] = [250, 250];
 
 export default Vue.extend({
   data() {
@@ -81,7 +81,7 @@ export default Vue.extend({
     draw2.line(0, 250, 500, 250).stroke({ color: "black" });
 
     const scale = scaleCreator([-10, 10], [0, 500]);
-    const svec = new SVector(draw2, [1, 1], scale, {});
+    const svec = new SVector(draw2, [1, 3], scale, {});
   },
 });
 </script>

@@ -34,9 +34,9 @@ class ScaledVector {
     [objConfig.ox, objConfig.oy] = this.fnScale([objConfig.ox, objConfig.oy]);
     const [x, y] = arrPos.map((item) => this.diffScale(item));
 
-    this.childVec = new CVector(draw, [x, -y], {
+    this.childVec = new CVector(draw, [x, y], {
       ox: objConfig.ox,
-      oy: -250,
+      oy: objConfig.oy,
     }).updatePos();
   }
 

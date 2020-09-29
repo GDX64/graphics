@@ -31,7 +31,7 @@ class CVector {
       .polygon(`0, ${headSize}, ${headSize * 1.5}, 0, 0, ${-headSize}`)
       .addClass("vector-head")
       .transform({
-        origin: { x: x, y: -y },
+        origin: { x: x, y: y },
         translateX: this.mod,
       })
       .fill(stroke.color);
@@ -63,7 +63,7 @@ class CVector {
     this.position = [x, y];
     this.group.transform({
       translateX: x + this.ox,
-      translateY: -y - this.oy,
+      translateY: y + this.oy,
       origin: "left" as any,
       rotate: -this.rotation,
     });
