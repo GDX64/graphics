@@ -8,7 +8,8 @@
 
 <script>
 import { SVG } from "@svgdotjs/svg.js";
-import ScaleGrid, { range } from "../pop/Scalegrid";
+import ScaleGrid, { range, scaleCreator } from "../pop/Scalegrid";
+import Svec from "../pop/ScaledVector";
 
 const N = 500;
 const sin = Math.sin;
@@ -20,10 +21,8 @@ export default {
     };
   },
   mounted() {
-    const nDrawSize = 300;
-    const draw = SVG()
-      .addTo("#svg-container")
-      .size(nDrawSize, nDrawSize);
+    const nDrawSize = 500;
+    const draw = SVG().addTo("#svg-container").size(nDrawSize, nDrawSize);
     window.draw = draw;
     const sg = new ScaleGrid(draw, { nTicks: 1, scale: [-3, 3] });
     const x = range(-5, 5, N);
@@ -32,6 +31,16 @@ export default {
     sg.drawTicksText();
     //sg.clearTicks();
     this.sg = sg;
+    const draw2 = SVG().addTo("#svg-container").size(nDrawSize, nDrawSize);
+    const sg2 = new ScaleGrid(draw2, { nTicks: 1, scale: [-1, 3] });
+    sg2.drawTicks({});
+    sg2.drawTicksText();
+    const fnScale = scaleCreator([-1, 3], [0, nDrawSize]);
+    const svec = new Svec(draw2, [1, 1], fnScale, {
+      ox: sg2.center[0],
+      oy: sg2.center[1],
+      stroke: { color: "red", width: 2 },
+    });
   },
   methods: {
     animeNow() {

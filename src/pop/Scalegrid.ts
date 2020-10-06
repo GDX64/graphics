@@ -78,7 +78,7 @@ class ScaleGrid {
     { scale = [-5, 5], stroke = { width: 2, color: "black" } }
   ) {
     const scaleRatio = scale[1] / (scale[1] - scale[0]);
-    const origin = { x: scaleRatio, y: scaleRatio };
+    const origin = { x: 1 - scaleRatio, y: scaleRatio };
     const size = [draw.cx() * 2, draw.cy() * 2];
     const center = [
       Math.floor(size[0] * origin.x),

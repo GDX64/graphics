@@ -29,20 +29,22 @@ class ScaledVector {
     this.fnScale = xyScaleCreator(fnScale);
     [this.x, this.y] = arrPos;
 
-    objConfig.ox = objConfig.ox || 0;
-    objConfig.oy = objConfig.oy || 0;
-    [objConfig.ox, objConfig.oy] = this.fnScale([objConfig.ox, objConfig.oy]);
     const [x, y] = arrPos.map((item) => this.diffScale(item));
 
-    this.childVec = new CVector(draw, [x, y], {
-      ox: objConfig.ox,
-      oy: objConfig.oy,
-    }).updatePos();
+    this.childVec = new CVector(draw, [x, y], objConfig).updatePos();
   }
 
   updatePos(x = this.x, y = this.y) {
+    const [argX, argY] = [x, y].map((item) => this.diffScale(item));
+    this.childVec.updatePos(argX, argY);
+    [this.x, this.y] = [x, y];
+    return this;
+  }
+  moveTo(x = this.x, y = this.y) {
+    const [argX, argY] = [x, y].map((item) => this.diffScale(item));
     debugger;
-    return this.childVec.updatePos(...this.fnScale([x, y]));
+    this.childVec.moveTo(argX, -argY);
+    return this;
   }
 }
 

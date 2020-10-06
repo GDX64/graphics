@@ -14,18 +14,20 @@ class CVector {
   y: number;
   mod: number;
   fnScale: Function;
+  headSize: number;
 
   constructor(
     draw: Svg,
     arrPos: number[],
     { headSize = 5, stroke = { width: 2, color: "black" }, ox = 0, oy = 0 }
   ) {
+    this.headSize = headSize;
     this.rotation = 0;
     this.position = [0, 0] as [number, number];
     [this.ox, this.oy] = [ox, oy];
     const [x, y] = arrPos;
     this.group = draw.group();
-    this.mod = Math.sqrt(x ** 2 + y ** 2);
+    this.mod = Math.sqrt(x ** 2 + y ** 2) - headSize;
     this.line = this.group.line(0, 0, this.mod, 0).stroke(stroke);
     this.arrow = this.group
       .polygon(`0, ${headSize}, ${headSize * 1.5}, 0, 0, ${-headSize}`)
@@ -47,7 +49,7 @@ class CVector {
     const atanX = Math.abs(x);
     this.rotation = (Math.atan(y / atanX) / Math.PI) * 180;
     if (x < 0) this.rotation = 180 - this.rotation;
-    this.mod = Math.sqrt(x ** 2 + y ** 2);
+    this.mod = Math.sqrt(x ** 2 + y ** 2) - this.headSize;
 
     this.line.plot(0, 0, this.mod, 0);
     this.arrow.transform({

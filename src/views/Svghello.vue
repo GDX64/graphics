@@ -81,7 +81,7 @@ export default Vue.extend({
     draw2.line(0, 250, 500, 250).stroke({ color: "black" });
 
     const scale = scaleCreator([-10, 10], [0, 500]);
-    const svec = new SVector(draw2, [1, 3], scale, {});
+    const svec = new SVector(draw2, [3, 3], scale, {ox: 250, oy:250}).updatePos(2,2);
   },
 });
 </script>
